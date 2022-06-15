@@ -1,0 +1,24 @@
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+                                        <script>
+                                        $(document).on('click','#save',function(e) {
+                                                var answer = [];
+                                                var id = <?php echo $quest['a_id']?>;
+                                                var no = <?php if(isset($_GET['page'])){echo $_GET['page'];}else{echo 1;}?>;
+                                                /*Initializing array with Checkbox checked values*/
+                                                $("input[name='answer[<?php if(isset($_GET['page'])){echo $_GET['page'];}else{echo 1;}?>]']:checked").each(function(){
+                                                    answer.push(this.value);
+                                                });
+                                            $.ajax({
+                                                data:  {
+                                                    answer:answer,
+                                                    id : id,
+                                                    no : no,
+                                                },
+                                                type: "POST",
+                                                url: "../includes/sessionanswer.php",
+                                                success: function(data){
+                                                    alert(data);
+                                                }
+                                            });
+                                        });
+                                        </script>

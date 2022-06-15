@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Home</title>
+    <script>
+        function showUser(str) {
+        if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+        } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser.php?q="+str,true);
+        xmlhttp.send();
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="chat-popup"  id="myForm">
+        <form action="action.php" method="POST" class="form-container">
+            <h2>User Support</h2>
+            <select name="users" onchange="showUser(this.value)" style="padding: 10px; width: 280px;">
+            <option value="">Select Your Staf ID No.</option>
+            <option value="52">Staff: 38015723</option>
+            <option value="53">Staff: 38015723</option>
+            <option value="58">Staff: 38015723</option>
+            </select><br><br>
+            <div id="txtHint"></div>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+    <button class="open-button" onclick="openForm();">Support</button>
+    <script src="script.js"></script>
+</body>
+</html>
